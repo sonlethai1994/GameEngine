@@ -75,6 +75,7 @@ namespace GameEngine
 			ss << "MouseScrolledEvent : ";
 			return ss.str();
 		}
+		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
 	class GE_API MouseButtonReleasedEvent : public MouseButtonEvent
