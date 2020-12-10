@@ -6,6 +6,8 @@
 
 #include <glad/glad.h>
 
+#include "Input.h"
+
 namespace GameEngine {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -36,6 +38,9 @@ namespace GameEngine {
 				layer->OnUpdate();
 
 			m_Window->OnUpdate();
+
+			auto [x, y] = Input::GetMousePosition();
+			GE_CORE_TRACE("{0}, {1}", x, y);
 		}
 	}
 
