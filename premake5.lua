@@ -23,9 +23,10 @@ include "GameEngine/vendor/ImGui"
 
 project "GameEngine"
 	location "GameEngine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	staticruntime "on"		
+	cppdialect "C++17"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -62,7 +63,6 @@ project "GameEngine"
 	
 	
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 		
 		defines
@@ -71,32 +71,29 @@ project "GameEngine"
 			"GE_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
-		
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
-		}
+	
 		
 	filter "configurations:Debug"
 		defines "GE_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Release"
 		defines "GE_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 		
 	filter "configurations:Dist"
 		defines "GE_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 		
 project "SandBox"
 	location "SandBox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	staticruntime "on"
+	cppdialect "C++17"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -121,7 +118,6 @@ project "SandBox"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 		
 		defines
